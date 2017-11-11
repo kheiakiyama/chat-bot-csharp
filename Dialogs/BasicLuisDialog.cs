@@ -40,11 +40,13 @@ namespace Microsoft.Bot.Sample.LuisBot
         private string GetLuisResultString(LuisResult result)
         {
             var msg = "";
-            foreach(var item in result.Entities)
+            foreach (var item in result.Intents)
+                msg += $"Entity:{item.Intent},";
+            foreach (var item in result.Entities)
                 msg += $"Entity:{item.Entity},Role:{item.Role},Type:{item.Type}";
             foreach (var item in result.CompositeEntities)
                 msg += $"CEntity:{item.Value},";
-            msg += $"TopScoringIntent:{result.TopScoringIntent.Intent},Query:{result.Query}";
+            msg += $"TopScoringIntent:{result.TopScoringIntent.Intent},Query:{result.Query},AlteredQuery:{result.AlteredQuery}";
             return msg;
         }
     }
