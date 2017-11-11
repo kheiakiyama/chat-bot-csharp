@@ -26,7 +26,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("GetAmazonRanking")]
         public async Task GetAmazonRankingIntent(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync($"You have reached the GetAmazonRanking intent. You said: {result.Query}"); //
+            await context.PostAsync($"You have reached the GetAmazonRanking intent. You said: {GetLuisResultString(result)}"); //
             context.Wait(MessageReceived);
         }
 
@@ -44,7 +44,7 @@ namespace Microsoft.Bot.Sample.LuisBot
                 msg += $"Entity:{item.ToString()},";
             foreach (var item in result.CompositeEntities)
                 msg += $"CEntity:{item.ToString()},";
-            msg += $"TopScoringIntent:{result.TopScoringIntent.Intent},";
+            msg += $"TopScoringIntent:{result.TopScoringIntent.Intent},Query:{result.Query}";
             return msg;
         }
     }
