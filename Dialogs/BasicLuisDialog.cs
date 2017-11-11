@@ -33,8 +33,19 @@ namespace Microsoft.Bot.Sample.LuisBot
         [LuisIntent("GetServiceOfMicrosoft")]
         public async Task GetServiceOfMicrosoftIntent(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync($"You have reached the GetServiceOfMicrosoft intent. You said: {result.Query}"); //
+            await context.PostAsync($"You have reached the GetServiceOfMicrosoft intent. {GetLuisResultString(result)}"); //
             context.Wait(MessageReceived);
+        }
+
+        private string GetLuisResultString(LuisResult result)
+        {
+            var msg = "";
+            foreach(var item in result.Entities)
+                msg += $"Entity:{item.ToString()},";
+            foreach (var item in result.CompositeEntities)
+                msg += $"CEntity:{item.ToString()},";
+            msg += $"TopScoringIntent:{result.TopScoringIntent.Intent},";
+            return msg;
         }
     }
 }
