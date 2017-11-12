@@ -41,7 +41,7 @@ namespace Microsoft.Bot.Sample.LuisBot
         {
             var msg = "";
             foreach (var item in result.Intents)
-                msg += $"Entity:{item.Intent},";
+                msg += $"Intent:{item.Intent},";
             foreach (var item in result.Entities)
                 msg += $"Entity:{item.Entity},Role:{item.Role},Type:{item.Type}";
             foreach (var item in result.CompositeEntities)
